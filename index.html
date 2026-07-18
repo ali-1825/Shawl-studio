@@ -291,21 +291,35 @@
 
   .insta{
     background:var(--cream-dark);
-    padding:50px 60px;
+    padding:70px 24px;
+    text-align:center;
   }
-  .insta-head{margin-bottom:26px;}
-  .insta-head h3{font-size:20px;letter-spacing:1px;}
-  .insta-head p{font-size:12px;color:var(--gold);margin:4px 0 14px;}
-  .insta-grid{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:14px;
+  .insta-content{
+    max-width:640px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
   }
-  .insta-grid a{
-    height:150px;overflow:hidden;display:block;
-    transition:opacity .25s;
+  .insta-content h3{
+    font-size:28px;
+    letter-spacing:2px;
+    margin-bottom:18px;
   }
-  .insta-grid a:hover{opacity:.85;}
+  .insta-content .insta-tagline{
+    font-size:15px;
+    color:var(--muted);
+    line-height:1.8;
+    margin-bottom:14px;
+    max-width:520px;
+  }
+  .insta-content .insta-handle{
+    font-size:13px;
+    color:var(--gold);
+    letter-spacing:1px;
+    margin-bottom:28px;
+  }
+  .insta-content .btn{margin-top:4px;}
 
   footer{
     background:#fff;
@@ -369,15 +383,14 @@
     }
     .story-text .btn{align-self:center;}
     .products-6{grid-template-columns:repeat(3,1fr);}
-    .insta{padding:40px 24px;}
-    .insta-grid{grid-template-columns:repeat(3,1fr);}
+    .insta{padding:56px 24px;}
+    .insta-content h3{font-size:24px;}
     footer{grid-template-columns:repeat(2,1fr);padding:30px 24px;}
   }
 
   @media(max-width:520px){
     .categories,.products,.features{grid-template-columns:1fr;}
     .products-6{grid-template-columns:repeat(2,1fr);}
-    .insta-grid{grid-template-columns:repeat(2,1fr);}
     footer{grid-template-columns:1fr;}
     .hero-text h2{font-size:32px;}
   }
@@ -576,18 +589,11 @@
   </section>
 
   <section class="insta">
-    <div class="insta-head">
+    <div class="insta-content">
       <h3>FOLLOW US ON INSTAGRAM</h3>
-      <p>@shawlstudiobydastaan</p>
+      <p class="insta-tagline">Step into the world of Dastaan — where tradition meets timeless elegance.</p>
+      <p class="insta-handle">@shawlstudiobydastaan</p>
       <a href="https://instagram.com/shawlstudiobydastaan" class="btn btn-outline" target="_blank" rel="noopener noreferrer">FOLLOW US</a>
-    </div>
-    <div class="insta-grid">
-      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1601924993787-375e577638e7?w=300&q=80" alt="Instagram post" loading="lazy"></a>
-      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1490481651871-abda77bbf490?w=300&q=80" alt="Instagram post" loading="lazy"></a>
-      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1588359348486-cb4a9067a4b8?w=300&q=80" alt="Instagram post" loading="lazy"></a>
-      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1558171813-4c088753af99?w=300&q=80" alt="Instagram post" loading="lazy"></a>
-      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=300&q=80" alt="Instagram post" loading="lazy"></a>
-      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1601924993787-375e577638e7?w=300&q=80&sat=-30" alt="Instagram post" loading="lazy"></a>
     </div>
   </section>
 
