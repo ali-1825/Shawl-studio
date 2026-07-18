@@ -264,7 +264,14 @@
     display:flex;
     flex-direction:column;
     justify-content:center;
+    align-items:flex-start;
     background:var(--cream);
+  }
+  .story-text .btn{
+    align-self:flex-start;
+    margin-top:4px;
+    text-align:center;
+    white-space:nowrap;
   }
   .story-text .eyebrow{
     font-size:11px;letter-spacing:3px;color:var(--gold);margin-bottom:12px;
@@ -353,7 +360,12 @@
     .story{grid-template-columns:1fr;}
     .story-img{min-height:300px;}
     .story-img img{object-position:62% center;}
-    .story-text{padding:36px 24px;text-align:center;}
+    .story-text{
+      padding:36px 24px;
+      text-align:center;
+      align-items:center;
+    }
+    .story-text .btn{align-self:center;}
     .products-6{grid-template-columns:repeat(3,1fr);}
     .insta{padding:40px 24px;}
     .insta-grid{grid-template-columns:repeat(3,1fr);}
@@ -524,7 +536,7 @@
       <p class="eyebrow">OUR STORY</p>
       <h2>CRAFTED WITH TRADITION</h2>
       <p>At Shawl Studio by Dastaan, every shawl reflects timeless craftsmanship and effortless elegance. We curate premium fabrics and refined designs that celebrate heritage while complementing modern style.</p>
-      <a href="#contact" class="btn">READ MORE</a>
+      <a href="#contact" class="btn btn-outline">READ MORE</a>
     </div>
   </section>
 
