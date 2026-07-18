@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Shawl Studio by Dastaan — handcrafted luxury shawls, pashmina, cashmere and embroidered collections.">
+<title>Shawl Studio by Dastaan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f7f1e8;
+    --cream-dark:#efe6d8;
+    --black:#1a1a1a;
+    --gold:#b08d57;
+    --text:#2b2620;
+    --muted:#7a7368;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+    background:var(--cream);
+  }
+  h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600;letter-spacing:1px;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;width:100%;height:100%;object-fit:cover;}
+  button{font-family:inherit;}
+
+  .topbar{
+    background:var(--black);
+    color:#fff;
+    text-align:center;
+    font-size:12px;
+    letter-spacing:1px;
+    padding:8px 10px;
+  }
+  .topbar span{opacity:.6;margin-left:6px;}
+
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 60px;
+    background:var(--cream);
+    border-bottom:1px solid #e6ddce;
+    position:sticky;
+    top:0;
+    z-index:100;
+  }
+  .logo{text-align:left;}
+  .logo h1{font-size:26px;letter-spacing:3px;}
+  .logo p{font-size:11px;letter-spacing:4px;color:var(--muted);margin-top:2px;}
+  nav ul{display:flex;gap:38px;font-size:13px;letter-spacing:1px;}
+  nav a{position:relative;transition:.2s;}
+  nav a:hover,
+  nav a.active{color:var(--gold);}
+  .header-actions{display:flex;gap:20px;align-items:center;}
+  .icons{display:flex;gap:20px;align-items:center;}
+  .icon-btn{
+    background:none;border:none;cursor:pointer;
+    color:var(--text);padding:4px;display:flex;align-items:center;
+    transition:.2s;
+  }
+  .icon-btn:hover{color:var(--gold);}
+  .icon-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;}
+  .cart-btn{position:relative;}
+  .cart-count{
+    position:absolute;top:-6px;right:-8px;
+    background:var(--gold);color:#fff;
+    font-size:10px;min-width:16px;height:16px;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    padding:0 4px;
+  }
+  .menu-toggle{
+    display:none;
+    background:none;border:none;cursor:pointer;
+    width:28px;height:20px;position:relative;
+  }
+  .menu-toggle span,
+  .menu-toggle span::before,
+  .menu-toggle span::after{
+    display:block;position:absolute;left:0;width:100%;height:2px;
+    background:var(--black);transition:.25s;
+  }
+  .menu-toggle span{top:50%;transform:translateY(-50%);}
+  .menu-toggle span::before{content:'';top:-8px;}
+  .menu-toggle span::after{content:'';top:8px;}
+  .menu-toggle.open span{background:transparent;}
+  .menu-toggle.open span::before{top:0;transform:rotate(45deg);}
+  .menu-toggle.open span::after{top:0;transform:rotate(-45deg);}
+
+  .hero{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    min-height:520px;
+    background:linear-gradient(120deg,#f3ece0 0%,#eadfcb 100%);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-text{padding:0 70px;}
+  .hero-text h2{font-size:52px;line-height:1.15;}
+  .hero-text p{margin:22px 0 30px;color:var(--muted);font-size:14px;letter-spacing:.5px;line-height:1.7;}
+  .btn{
+    display:inline-block;
+    background:var(--black);
+    color:#fff;
+    padding:15px 32px;
+    font-size:12px;
+    letter-spacing:2px;
+    cursor:pointer;
+    border:none;
+    transition:.25s;
+  }
+  .btn:hover{background:var(--gold);}
+  .btn-outline{
+    background:transparent;
+    border:1px solid var(--black);
+    color:var(--black);
+  }
+  .btn-outline:hover{background:var(--black);color:#fff;}
+  .hero-visual{position:relative;height:520px;overflow:hidden;}
+  .hero-slide{
+    position:absolute;inset:0;opacity:0;
+    transition:opacity .6s ease;
+  }
+  .hero-slide.active{opacity:1;}
+  .hero-slide img{width:100%;height:100%;object-fit:cover;}
+  .dots{
+    position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+    display:flex;gap:8px;z-index:2;
+  }
+  .dot{
+    width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);
+    border:none;cursor:pointer;padding:0;
+  }
+  .dot.active{background:var(--black);}
+
+  .categories{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    padding:50px 60px;
+  }
+  .cat-card{
+    height:220px;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+    color:#fff;
+    position:relative;
+    cursor:pointer;
+    overflow:hidden;
+    background-size:cover;
+    background-position:center;
+  }
+  .cat-card::before{
+    content:'';position:absolute;inset:0;
+    background:rgba(0,0,0,.35);
+    transition:.3s;
+  }
+  .cat-card:hover::before{background:rgba(0,0,0,.5);}
+  .cat-card:hover img{transform:scale(1.06);}
+  .cat-card img{
+    position:absolute;inset:0;transition:transform .5s ease;
+  }
+  .cat-card h3{font-size:20px;letter-spacing:2px;position:relative;z-index:1;}
+  .cat-card .line{width:30px;height:1px;background:var(--gold);margin:8px 0;position:relative;z-index:1;}
+  .cat-card span{position:relative;z-index:1;font-size:13px;letter-spacing:1px;}
+
+  .section-title{
+    text-align:center;
+    padding:20px 0 40px;
+  }
+  .section-title h2{font-size:30px;letter-spacing:2px;}
+  .section-title .underline{
+    width:50px;height:2px;background:var(--gold);
+    margin:14px auto 0;
+  }
+
+  .products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:26px;
+    padding:0 60px 50px;
+  }
+  .product-card{cursor:pointer;transition:transform .25s;}
+  .product-card:hover{transform:translateY(-4px);}
+  .product-img{
+    position:relative;
+    height:280px;
+    overflow:hidden;
+    background:var(--cream-dark);
+  }
+  .product-img img{transition:transform .5s ease;}
+  .product-card:hover .product-img img{transform:scale(1.05);}
+  .badge{
+    position:absolute;top:14px;left:14px;z-index:1;
+    background:#fff;color:var(--text);
+    font-size:10px;letter-spacing:1px;
+    padding:5px 12px;
+  }
+  .product-info{padding:16px 4px;text-align:center;}
+  .product-info h4{font-size:13px;letter-spacing:1px;}
+  .product-info p.sub{font-size:11px;color:var(--muted);margin:4px 0 8px;letter-spacing:.5px;}
+  .price{color:var(--gold);font-size:14px;font-weight:500;}
+
+  .features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    background:var(--cream-dark);
+    padding:40px 60px;
+    gap:20px;
+  }
+  .feature{display:flex;gap:14px;align-items:flex-start;}
+  .feature .ico{
+    flex-shrink:0;width:28px;height:28px;color:var(--gold);
+  }
+  .feature .ico svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.5;}
+  .feature h5{font-size:13px;letter-spacing:1px;margin-bottom:4px;}
+  .feature p{font-size:11px;color:var(--muted);line-height:1.5;}
+
+  .story{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+  }
+  .story-img{height:420px;overflow:hidden;}
+  .story-text{padding:0 70px;}
+  .story-text .eyebrow{
+    font-size:11px;letter-spacing:3px;color:var(--gold);margin-bottom:12px;
+  }
+  .story-text h2{font-size:30px;margin-bottom:18px;}
+  .story-text p{color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:26px;}
+
+  .best-sellers-wrap{padding:60px 60px 50px;}
+  .products-6{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:18px;
+  }
+  .products-6 .product-img{height:200px;}
+
+  .insta{
+    background:var(--cream-dark);
+    padding:50px 60px;
+  }
+  .insta-head{margin-bottom:26px;}
+  .insta-head h3{font-size:20px;letter-spacing:1px;}
+  .insta-head p{font-size:12px;color:var(--gold);margin:4px 0 14px;}
+  .insta-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:14px;
+  }
+  .insta-grid a{
+    height:150px;overflow:hidden;display:block;
+    transition:opacity .25s;
+  }
+  .insta-grid a:hover{opacity:.85;}
+
+  footer{
+    background:#fff;
+    padding:60px 60px 30px;
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;
+    gap:30px;
+    border-top:1px solid #eee;
+  }
+  footer h4{font-size:12px;letter-spacing:1.5px;margin-bottom:18px;}
+  footer ul li{font-size:12.5px;color:var(--muted);margin-bottom:10px;}
+  footer ul a:hover{color:var(--gold);}
+  footer .brand p{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6;}
+  .copyright{
+    text-align:center;font-size:11px;color:var(--muted);
+    padding:20px;border-top:1px solid #eee;background:#fff;
+  }
+
+  @media(max-width:900px){
+    header{padding:16px 20px;}
+    .menu-toggle{display:block;}
+    nav{
+      position:absolute;top:100%;left:0;right:0;
+      background:var(--cream);
+      border-bottom:1px solid #e6ddce;
+      max-height:0;overflow:hidden;
+      transition:max-height .3s ease;
+    }
+    nav.open{max-height:320px;}
+    nav ul{
+      flex-direction:column;gap:0;
+      padding:12px 20px 20px;
+    }
+    nav li{border-bottom:1px solid #e6ddce;}
+    nav a{display:block;padding:14px 0;}
+    .hero{grid-template-columns:1fr;}
+    .hero-text{padding:40px 24px;text-align:center;}
+    .hero-text h2{font-size:38px;}
+    .hero-visual{height:360px;}
+    .categories,.products,.features{grid-template-columns:repeat(2,1fr);padding:24px;}
+    .story{grid-template-columns:1fr;}
+    .story-img{height:280px;}
+    .story-text{padding:30px 24px;text-align:center;}
+    .products-6{grid-template-columns:repeat(3,1fr);}
+    .insta{padding:40px 24px;}
+    .insta-grid{grid-template-columns:repeat(3,1fr);}
+    footer{grid-template-columns:repeat(2,1fr);padding:30px 24px;}
+  }
+
+  @media(max-width:520px){
+    .categories,.products,.features{grid-template-columns:1fr;}
+    .products-6{grid-template-columns:repeat(2,1fr);}
+    .insta-grid{grid-template-columns:repeat(2,1fr);}
+    footer{grid-template-columns:1fr;}
+    .hero-text h2{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">FREE DELIVERY ON ORDERS OVER PKR 15,000 &nbsp;|&nbsp; WORLDWIDE SHIPPING <span>AVAILABLE</span></div>
+
+  <header>
+    <a href="#home" class="logo" aria-label="Shawl Studio home">
+      <h1>SHAWL STUDIO</h1>
+      <p>BY DASTAAN</p>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+    </button>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#shop">SHOP SHAWLS</a></li>
+        <li><a href="#collections">COLLECTIONS</a></li>
+        <li><a href="#about">ABOUT US</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <div class="icons">
+        <button class="icon-btn" type="button" aria-label="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+        <button class="icon-btn" type="button" aria-label="Account">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </button>
+        <button class="icon-btn cart-btn" type="button" aria-label="Cart">
+          <svg viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6l-1-3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h2>LUXURY<br>IN EVERY FOLD</h2>
+      <p>Handcrafted Shawls<br>Timeless Elegance &bull; Premium Fabrics</p>
+      <a href="#shop" class="btn">SHOP COLLECTION</a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-slide active">
+        <img src="https://images.unsplash.com/photo-1601924993787-375e577638e7?w=900&q=80" alt="Luxury shawl collection" loading="eager">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1490481651871-abda77bbf490?w=900&q=80" alt="Premium pashmina shawl" loading="lazy">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1558171813-4c088753af99?w=900&q=80" alt="Handcrafted fabric detail" loading="lazy">
+      </div>
+      <div class="dots" aria-label="Hero slideshow">
+        <button class="dot active" type="button" aria-label="Slide 1"></button>
+        <button class="dot" type="button" aria-label="Slide 2"></button>
+        <button class="dot" type="button" aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="collections">
+    <a href="#shop" class="cat-card">
+      <img src="https://images.unsplash.com/photo-1558171813-4c088753af99?w=600&q=80" alt="Cashmere shawls">
+      <h3>CASHMERE</h3><div class="line"></div><span>SHAWLS</span>
+    </a>
+    <a href="#shop" class="cat-card">
+      <img src="https://images.unsplash.com/photo-1490481651871-abda77bbf490?w=600&q=80" alt="Pashmina shawls">
+      <h3>PASHMINA</h3><div class="line"></div><span>SHAWLS</span>
+    </a>
+    <a href="#shop" class="cat-card">
+      <img src="https://images.unsplash.com/photo-1588359348486-cb4a9067a4b8?w=600&q=80" alt="Embroidered shawls">
+      <h3>EMBROIDERED</h3><div class="line"></div><span>SHAWLS</span>
+    </a>
+    <a href="#shop" class="cat-card">
+      <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&q=80" alt="Winter collection">
+      <h3>WINTER</h3><div class="line"></div><span>COLLECTION</span>
+    </a>
+  </section>
+
+  <div class="section-title" id="shop">
+    <h2>NEW ARRIVALS</h2>
+    <div class="underline"></div>
+  </div>
+  <section class="products">
+    <article class="product-card">
+      <div class="product-img">
+        <span class="badge">NEW</span>
+        <img src="https://images.unsplash.com/photo-1601924993787-375e577638e7?w=600&q=80" alt="Ivory Dream pashmina shawl" loading="lazy">
+      </div>
+      <div class="product-info">
+        <h4>IVORY DREAM</h4>
+        <p class="sub">PASHMINA SHAWL</p>
+        <span class="price">Rs. 14,500</span>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-img">
+        <span class="badge">NEW</span>
+        <img src="https://images.unsplash.com/photo-1588359348486-cb4a9067a4b8?w=600&q=80" alt="Midnight Elegance embroidered shawl" loading="lazy">
+      </div>
+      <div class="product-info">
+        <h4>MIDNIGHT ELEGANCE</h4>
+        <p class="sub">EMBROIDERED SHAWL</p>
+        <span class="price">Rs. 16,900</span>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-img">
+        <span class="badge">NEW</span>
+        <img src="https://images.unsplash.com/photo-1558171813-4c088753af99?w=600&q=80" alt="Sand Mist cashmere shawl" loading="lazy">
+      </div>
+      <div class="product-info">
+        <h4>SAND MIST</h4>
+        <p class="sub">CASHMERE SHAWL</p>
+        <span class="price">Rs. 12,900</span>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-img">
+        <span class="badge">NEW</span>
+        <img src="https://images.unsplash.com/photo-1490481651871-abda77bbf490?w=600&q=80" alt="Olive Heritage luxury shawl" loading="lazy">
+      </div>
+      <div class="product-info">
+        <h4>OLIVE HERITAGE</h4>
+        <p class="sub">LUXURY SHAWL</p>
+        <span class="price">Rs. 15,900</span>
+      </div>
+    </article>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <div class="ico">
+        <svg viewBox="0 0 24 24"><path d="M12 3l2 4 4.5.5-3.2 3 1 4.5L12 13l-4.3 2.5 1-4.5-3.2-3L10 7z"/></svg>
+      </div>
+      <div><h5>PREMIUM FABRICS</h5><p>Finest quality materials sourced carefully</p></div>
+    </div>
+    <div class="feature">
+      <div class="ico">
+        <svg viewBox="0 0 24 24"><path d="M8 12l2 2 6-6"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+      </div>
+      <div><h5>HANDCRAFTED</h5><p>Made with love by skilled artisans</p></div>
+    </div>
+    <div class="feature">
+      <div class="ico">
+        <svg viewBox="0 0 24 24"><path d="M3 7h11v10H3z"/><path d="M14 10h4l3 3v4h-7z"/><circle cx="7" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg>
+      </div>
+      <div><h5>NATIONWIDE DELIVERY</h5><p>Fast &amp; reliable delivery across Pakistan</p></div>
+    </div>
+    <div class="feature">
+      <div class="ico">
+        <svg viewBox="0 0 24 24"><path d="M4 7h13l3 3v7H4z"/><path d="M9 11h6"/></svg>
+      </div>
+      <div><h5>EASY EXCHANGE</h5><p>Hassle-free returns &amp; exchanges</p></div>
+    </div>
+  </section>
+
+  <section class="story" id="about">
+    <div class="story-img">
+      <img src="https://images.unsplash.com/photo-1558171813-4c088753af99?w=900&q=80" alt="Artisan craftsmanship" loading="lazy">
+    </div>
+    <div class="story-text">
+      <p class="eyebrow">OUR STORY</p>
+      <h2>CRAFTED WITH TRADITION</h2>
+      <p>At Shawl Studio by Dastaan, every shawl reflects timeless craftsmanship and effortless elegance. We curate premium fabrics and refined designs that celebrate heritage while complementing modern style.</p>
+      <a href="#contact" class="btn">READ MORE</a>
+    </div>
+  </section>
+
+  <div class="section-title">
+    <h2>BEST SELLERS</h2>
+    <div class="underline"></div>
+  </div>
+  <section class="best-sellers-wrap">
+    <div class="products-6">
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1601924993787-375e577638e7?w=400&q=80" alt="Pearl Whisper shawl" loading="lazy"></div>
+        <div class="product-info"><h4>PEARL WHISPER</h4><span class="price">Rs. 13,900</span></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1588359348486-cb4a9067a4b8?w=400&q=80" alt="Noir Bloom shawl" loading="lazy"></div>
+        <div class="product-info"><h4>NOIR BLOOM</h4><span class="price">Rs. 16,500</span></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1490481651871-abda77bbf490?w=400&q=80" alt="Blush Rose shawl" loading="lazy"></div>
+        <div class="product-info"><h4>BLUSH ROSE</h4><span class="price">Rs. 14,500</span></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1558171813-4c088753af99?w=400&q=80" alt="White Orchid shawl" loading="lazy"></div>
+        <div class="product-info"><h4>WHITE ORCHID</h4><span class="price">Rs. 15,900</span></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&q=80" alt="Misty Grey shawl" loading="lazy"></div>
+        <div class="product-info"><h4>MISTY GREY</h4><span class="price">Rs. 13,500</span></div>
+      </article>
+      <article class="product-card">
+        <div class="product-img"><img src="https://images.unsplash.com/photo-1601924993787-375e577638e7?w=400&q=80&sat=-50" alt="Ruby Heritage shawl" loading="lazy"></div>
+        <div class="product-info"><h4>RUBY HERITAGE</h4><span class="price">Rs. 17,900</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="insta">
+    <div class="insta-head">
+      <h3>FOLLOW US ON INSTAGRAM</h3>
+      <p>@shawlstudiobydastaan</p>
+      <a href="https://instagram.com/shawlstudiobydastaan" class="btn btn-outline" target="_blank" rel="noopener noreferrer">FOLLOW US</a>
+    </div>
+    <div class="insta-grid">
+      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1601924993787-375e577638e7?w=300&q=80" alt="Instagram post" loading="lazy"></a>
+      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1490481651871-abda77bbf490?w=300&q=80" alt="Instagram post" loading="lazy"></a>
+      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1588359348486-cb4a9067a4b8?w=300&q=80" alt="Instagram post" loading="lazy"></a>
+      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1558171813-4c088753af99?w=300&q=80" alt="Instagram post" loading="lazy"></a>
+      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=300&q=80" alt="Instagram post" loading="lazy"></a>
+      <a href="https://instagram.com/shawlstudiobydastaan" target="_blank" rel="noopener noreferrer"><img src="https://images.unsplash.com/photo-1601924993787-375e577638e7?w=300&q=80&sat=-30" alt="Instagram post" loading="lazy"></a>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="brand">
+      <h1 style="font-size:20px;">SHAWL STUDIO</h1>
+      <p style="font-size:11px;letter-spacing:2px;">BY DASTAAN</p>
+      <p>Timeless shawls, crafted with love, inspired by tradition.</p>
+    </div>
+    <div>
+      <h4>SHOP</h4>
+      <ul>
+        <li><a href="#shop">All Shawls</a></li>
+        <li><a href="#collections">Cashmere Shawls</a></li>
+        <li><a href="#collections">Pashmina Shawls</a></li>
+        <li><a href="#collections">Embroidered Shawls</a></li>
+        <li><a href="#collections">Winter Collection</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>CUSTOMER CARE</h4>
+      <ul>
+        <li><a href="#contact">Shipping Policy</a></li>
+        <li><a href="#contact">Returns &amp; Exchanges</a></li>
+        <li><a href="#contact">FAQs</a></li>
+        <li><a href="#contact">Track Order</a></li>
+        <li><a href="#contact">Care Instructions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>ABOUT US</h4>
+      <ul>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#about">Artisan Craft</a></li>
+        <li><a href="#contact">Blog</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>GET IN TOUCH</h4>
+      <ul>
+        <li><a href="tel:+923001234567">+92 300 1234567</a></li>
+        <li><a href="mailto:hello@shawlstudiobydastaan.com">hello@shawlstudiobydastaan.com</a></li>
+        <li>Lahore, Pakistan</li>
+      </ul>
+    </div>
+  </footer>
+  <div class="copyright">&copy; 2026 Shawl Studio by Dastaan. All Rights Reserved.</div>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('main-nav');
+    const navLinks = nav.querySelectorAll('a');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open menu');
+      });
+    });
+
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+    let slideTimer;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      showSlide((currentSlide + 1) % slides.length);
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showSlide(index);
+        clearInterval(slideTimer);
+        slideTimer = setInterval(nextSlide, 5000);
+      });
+    });
+
+    slideTimer = setInterval(nextSlide, 5000);
+  </script>
+</body>
+</html>
