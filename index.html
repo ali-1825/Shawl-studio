@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Shawl Studio by Dastaan — handcrafted luxury shawls, pashmina, cashmere and embroidered collections.">
 <title>Shawl Studio by Dastaan</title>
+<link rel="preload" as="image" href="images/hero-shawl.png" fetchpriority="high">
+<meta name="theme-color" content="#f7f1e8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,17 +20,39 @@
     --muted:#7a7368;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  html{
+    scroll-behavior:smooth;
+    scroll-padding-top:72px;
+    -webkit-text-size-adjust:100%;
+  }
   body{
     font-family:'Poppins',sans-serif;
     color:var(--text);
     background:var(--cream);
     overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    opacity:0;
+    transition:opacity .35s ease;
   }
+  body.is-ready{opacity:1;}
   h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600;letter-spacing:1px;}
   a{text-decoration:none;color:inherit;}
   ul{list-style:none;}
-  img{max-width:100%;display:block;width:100%;height:100%;object-fit:cover;}
+  img{
+    max-width:100%;
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    background:var(--cream-dark);
+  }
+  img[loading="lazy"]{
+    opacity:0;
+    transition:opacity .4s ease;
+  }
+  img.is-loaded{opacity:1;}
+  .hero-media img{opacity:1;}
   button{font-family:inherit;}
 
   header{
@@ -42,6 +66,7 @@
     position:sticky;
     top:0;
     z-index:100;
+    transform:translateZ(0);
     transition:padding .3s ease, background .3s ease, border-color .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
   }
   header.scrolled{
@@ -186,9 +211,10 @@
     transition:.3s;
   }
   .cat-card:hover::before{background:rgba(0,0,0,.5);}
-  .cat-card:hover img{transform:scale(1.06);}
+  .cat-card:hover img{transform:scale3d(1.06,1.06,1);}
   .cat-card img{
-    position:absolute;inset:0;transition:transform .5s ease;
+    position:absolute;inset:0;
+    transition:transform .5s ease, opacity .4s ease;
     object-fit:cover;
     object-position:center center;
   }
@@ -215,16 +241,16 @@
     gap:26px;
     padding:0 60px 50px;
   }
-  .product-card{cursor:pointer;transition:transform .25s;}
-  .product-card:hover{transform:translateY(-4px);}
+  .product-card{cursor:pointer;transition:transform .25s ease;}
+  .product-card:hover{transform:translate3d(0,-4px,0);}
   .product-img{
     position:relative;
     height:280px;
     overflow:hidden;
     background:var(--cream-dark);
   }
-  .product-img img{transition:transform .5s ease;}
-  .product-card:hover .product-img img{transform:scale(1.05);}
+  .product-img img{transition:transform .5s ease, opacity .4s ease;}
+  .product-card:hover .product-img img{transform:scale3d(1.05,1.05,1);}
   .badge{
     position:absolute;top:14px;left:14px;z-index:1;
     background:#fff;color:var(--text);
@@ -356,6 +382,25 @@
   .copyright{
     text-align:center;font-size:11px;color:var(--muted);
     padding:20px;border-top:1px solid #eee;background:#fff;
+  }
+
+  .best-sellers-wrap,
+  .story,
+  .features,
+  .insta,
+  footer{
+    content-visibility:auto;
+    contain-intrinsic-size:auto 520px;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{
+      animation-duration:.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.01ms !important;
+    }
+    body{transition:none;}
   }
 
   @media(max-width:1200px){
@@ -526,7 +571,7 @@
   <section class="hero" id="home">
     <div class="hero-inner">
       <picture class="hero-media">
-        <img src="images/hero-shawl.png" alt="Luxury shawl — Shawl Studio by Dastaan" loading="eager">
+        <img src="images/hero-shawl.png" alt="Luxury shawl — Shawl Studio by Dastaan" width="1024" height="430" loading="eager" fetchpriority="high" decoding="async">
       </picture>
       <div class="hero-text">
         <h2>LUXURY<br>IN EVERY FOLD</h2>
@@ -538,19 +583,19 @@
 
   <section class="categories" id="collections">
     <a href="#shop" class="cat-card">
-      <img src="images/cashmere.png" alt="Cashmere shawls">
+      <img src="images/cashmere.png" alt="Cashmere shawls" loading="lazy" decoding="async">
       <h3>CASHMERE</h3><div class="line"></div><span>SHAWLS</span>
     </a>
     <a href="#shop" class="cat-card">
-      <img src="images/pashmina.png" alt="Pashmina shawls">
+      <img src="images/pashmina.png" alt="Pashmina shawls" loading="lazy" decoding="async">
       <h3>PASHMINA</h3><div class="line"></div><span>SHAWLS</span>
     </a>
     <a href="#shop" class="cat-card">
-      <img src="images/embroidered.png" alt="Embroidered shawls">
+      <img src="images/embroidered.png" alt="Embroidered shawls" loading="lazy" decoding="async">
       <h3>EMBROIDERED</h3><div class="line"></div><span>SHAWLS</span>
     </a>
     <a href="#shop" class="cat-card">
-      <img src="images/winter.png" alt="Winter collection">
+      <img src="images/winter.png" alt="Winter collection" loading="lazy" decoding="async">
       <h3>WINTER</h3><div class="line"></div><span>COLLECTION</span>
     </a>
   </section>
@@ -562,27 +607,27 @@
   <section class="best-sellers-wrap">
     <div class="products-6">
       <article class="product-card">
-        <div class="product-img"><img src="images/collection-1.png" alt="Pearl Whisper shawl" loading="lazy"></div>
+        <div class="product-img"><img src="images/collection-1.png" alt="Pearl Whisper shawl" loading="lazy" decoding="async"></div>
         <div class="product-info"><h4>PEARL WHISPER</h4><span class="price">$1</span></div>
       </article>
       <article class="product-card">
-        <div class="product-img"><img src="images/collection-2.png" alt="Noir Bloom shawl" loading="lazy"></div>
+        <div class="product-img"><img src="images/collection-2.png" alt="Noir Bloom shawl" loading="lazy" decoding="async"></div>
         <div class="product-info"><h4>NOIR BLOOM</h4><span class="price">$1</span></div>
       </article>
       <article class="product-card">
-        <div class="product-img"><img src="images/collection-3.png" alt="Blush Rose shawl" loading="lazy"></div>
+        <div class="product-img"><img src="images/collection-3.png" alt="Blush Rose shawl" loading="lazy" decoding="async"></div>
         <div class="product-info"><h4>BLUSH ROSE</h4><span class="price">$1</span></div>
       </article>
       <article class="product-card">
-        <div class="product-img"><img src="images/collection-4.png" alt="White Orchid shawl" loading="lazy"></div>
+        <div class="product-img"><img src="images/collection-4.png" alt="White Orchid shawl" loading="lazy" decoding="async"></div>
         <div class="product-info"><h4>WHITE ORCHID</h4><span class="price">$1</span></div>
       </article>
       <article class="product-card">
-        <div class="product-img"><img src="images/collection-5.png" alt="Misty Grey shawl" loading="lazy"></div>
+        <div class="product-img"><img src="images/collection-5.png" alt="Misty Grey shawl" loading="lazy" decoding="async"></div>
         <div class="product-info"><h4>MISTY GREY</h4><span class="price">$1</span></div>
       </article>
       <article class="product-card">
-        <div class="product-img"><img src="images/collection-6.png" alt="Ruby Heritage shawl" loading="lazy"></div>
+        <div class="product-img"><img src="images/collection-6.png" alt="Ruby Heritage shawl" loading="lazy" decoding="async"></div>
         <div class="product-info"><h4>RUBY HERITAGE</h4><span class="price">$1</span></div>
       </article>
     </div>
@@ -590,7 +635,7 @@
 
   <section class="story" id="about">
     <div class="story-img">
-      <img src="images/craftsmanship.png" alt="Artisan weaving shawls by hand" loading="lazy">
+      <img src="images/craftsmanship.png" alt="Artisan weaving shawls by hand" loading="lazy" decoding="async">
     </div>
     <div class="story-text">
       <p class="eyebrow">OUR STORY</p>
@@ -687,13 +732,36 @@
     const nav = document.getElementById('main-nav');
     const navLinks = nav.querySelectorAll('a');
     const header = document.querySelector('header');
+    let scrollTicking = false;
 
     function updateHeader() {
       header.classList.toggle('scrolled', window.scrollY > 20);
+      scrollTicking = false;
     }
 
+    function onScroll() {
+      if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(updateHeader);
+      }
+    }
+
+    function markImageLoaded(img) {
+      img.classList.add('is-loaded');
+    }
+
+    document.querySelectorAll('img').forEach((img) => {
+      if (img.complete) {
+        markImageLoaded(img);
+      } else {
+        img.addEventListener('load', () => markImageLoaded(img), { once: true });
+        img.addEventListener('error', () => markImageLoaded(img), { once: true });
+      }
+    });
+
+    document.body.classList.add('is-ready');
     updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     menuToggle.addEventListener('click', () => {
       const isOpen = nav.classList.toggle('open');
