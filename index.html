@@ -94,15 +94,48 @@
   .menu-toggle.open span::after{top:0;transform:rotate(-45deg);}
 
   .hero{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    align-items:center;
-    min-height:520px;
-    background:linear-gradient(120deg,#f3ece0 0%,#eadfcb 100%);
     position:relative;
     overflow:hidden;
+    background:var(--cream);
   }
-  .hero-text{padding:0 70px;}
+  .hero-inner{
+    position:relative;
+    width:100%;
+  }
+  .hero-media{
+    display:block;
+    width:100%;
+    line-height:0;
+  }
+  .hero-media img{
+    width:100%;
+    height:auto;
+    max-width:100%;
+    display:block;
+    object-fit:initial;
+  }
+  .hero-inner::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+      90deg,
+      rgba(247,241,232,0.92) 0%,
+      rgba(247,241,232,0.72) 28%,
+      rgba(247,241,232,0.25) 42%,
+      transparent 58%
+    );
+    pointer-events:none;
+  }
+  .hero-text{
+    position:absolute;
+    top:50%;
+    left:0;
+    transform:translateY(-50%);
+    padding:0 60px;
+    max-width:480px;
+    z-index:2;
+  }
   .hero-text h2{font-size:52px;line-height:1.15;}
   .hero-text p{margin:22px 0 30px;color:var(--muted);font-size:14px;letter-spacing:.5px;line-height:1.7;}
   .btn{
@@ -123,29 +156,6 @@
     color:var(--black);
   }
   .btn-outline:hover{background:var(--black);color:#fff;}
-  .hero-visual{
-    position:relative;
-    min-height:520px;
-    overflow:hidden;
-    background:var(--cream-dark);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .hero-slide{
-    position:relative;
-    width:100%;
-    opacity:0;
-    transition:opacity .6s ease;
-  }
-  .hero-slide.active{opacity:1;}
-  .hero-slide img{
-    width:100%;
-    height:auto;
-    max-height:520px;
-    object-fit:contain;
-    object-position:center;
-  }
 
   .categories{
     display:grid;
@@ -315,11 +325,23 @@
     }
     nav li{border-bottom:1px solid #e6ddce;}
     nav a{display:block;padding:14px 0;}
-    .hero{grid-template-columns:1fr;}
-    .hero-text{padding:40px 24px;text-align:center;}
+    .hero-inner::after{display:none;}
+    .hero-media img{
+      max-height:320px;
+      object-fit:cover;
+      object-position:72% center;
+    }
+    .hero-text{
+      position:relative;
+      top:auto;
+      left:auto;
+      transform:none;
+      max-width:none;
+      padding:36px 24px 44px;
+      text-align:center;
+      background:var(--cream);
+    }
     .hero-text h2{font-size:38px;}
-    .hero-visual{min-height:360px;}
-    .hero-slide img{max-height:360px;}
     .categories,.products,.features{grid-template-columns:repeat(2,1fr);padding:24px;}
     .story{grid-template-columns:1fr;}
     .story-img{min-height:280px;}
@@ -377,14 +399,14 @@
   </header>
 
   <section class="hero" id="home">
-    <div class="hero-text">
-      <h2>LUXURY<br>IN EVERY FOLD</h2>
-      <p>Handcrafted Shawls<br>Timeless Elegance &bull; Premium Fabrics</p>
-      <a href="#shop" class="btn">SHOP COLLECTION</a>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-slide active">
+    <div class="hero-inner">
+      <picture class="hero-media">
         <img src="images/hero-shawl.png" alt="Luxury shawl — Shawl Studio by Dastaan" loading="eager">
+      </picture>
+      <div class="hero-text">
+        <h2>LUXURY<br>IN EVERY FOLD</h2>
+        <p>Handcrafted Shawls<br>Timeless Elegance &bull; Premium Fabrics</p>
+        <a href="#shop" class="btn">SHOP COLLECTION</a>
       </div>
     </div>
   </section>
