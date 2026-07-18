@@ -218,7 +218,20 @@
     grid-template-columns:1fr 1fr;
     align-items:center;
   }
-  .story-img{height:420px;overflow:hidden;}
+  .story-img{
+    overflow:hidden;
+    background:#1a1410;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:420px;
+  }
+  .story-img img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    max-height:none;
+  }
   .story-text{padding:0 70px;}
   .story-text .eyebrow{
     font-size:11px;letter-spacing:3px;color:var(--gold);margin-bottom:12px;
@@ -292,7 +305,7 @@
     .hero-visual{height:360px;}
     .categories,.products,.features{grid-template-columns:repeat(2,1fr);padding:24px;}
     .story{grid-template-columns:1fr;}
-    .story-img{height:280px;}
+    .story-img{min-height:280px;}
     .story-text{padding:30px 24px;text-align:center;}
     .products-6{grid-template-columns:repeat(3,1fr);}
     .insta{padding:40px 24px;}
@@ -458,7 +471,7 @@
 
   <section class="story" id="about">
     <div class="story-img">
-      <img src="https://images.unsplash.com/photo-1558171813-4c088753af99?w=900&q=80" alt="Artisan craftsmanship" loading="lazy">
+      <img src="images/craftsmanship.png" alt="Artisan weaving shawls by hand" loading="lazy">
     </div>
     <div class="story-text">
       <p class="eyebrow">OUR STORY</p>
